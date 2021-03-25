@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Todo List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="master.css">
+</head>
+<body>
+  <div id="root">
+    <div class="container">
+      <h1>ToDo List</h1>
+      <ul class="list">
+        <li v-for="todo in todosComputed">
+          <span class="title" :class="(todo.status == 'done') ? 'crossed' : ''">{{ todo.title }}</span>
+          <div class="icons">
+            <span v-if="todo.status != 'done'" @click="edit(todo)" class="editIcon"><i class="far fa-edit"></i></span>
+            <span v-if="todo.status != 'done'" @click="check(todo)" class="checkIcon"><i class="fas fa-check-circle"></i></span>
+            <span v-if="todo.status == 'done'" @click="remove(todo)" class="checkIcon"><i class="fas fa-trash"></i></span>
+          </div>
+        </li>
+      </ul>
+      <div class="text" v-if="!isEditing">
+        <input v-model="inputTxt" class="text" type="text" placeholder="Add your new ToDo" v-on:keyup.enter="add">
+      </div>
+      <div class="text" v-else>
+        <input v-model="inputTxt" class="text" type="text" v-on:keyup.enter="update">
+      </div>
+
+    </div>
+
+
+
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="main.js" charset="utf-8"></script>
+</body>
+</html>
